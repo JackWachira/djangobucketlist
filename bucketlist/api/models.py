@@ -6,5 +6,5 @@ from django.db import models
 class BucketList(models.Model):
     pass
 
-class BucketListItem(models.model):
+class BucketListItem(models.Model):
     pass
