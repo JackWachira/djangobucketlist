@@ -25,7 +25,8 @@ class BucketListItem(models.Model):
     date_updated = models.DateField(auto_now=True)
     done = models.BooleanField(default=False)
     bucketlist = models.ForeignKey(BucketList, on_delete=models.CASCADE,
-                                   related_name="items", default=1)
+                                   related_name="items", default=1,
+                                   editable=False)
 
     def __unicode__(self):
         return u'%s' % self.name

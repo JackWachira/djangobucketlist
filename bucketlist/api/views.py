@@ -18,17 +18,24 @@ class BucketListView(generics.ListCreateAPIView):
 
 
 class BucketListDetailView(generics.RetrieveUpdateDestroyAPIView):
-    # get, put, delete '/bucketlists/<id>'
+    # get, put, delete '/bucketlists/<pk>'
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class BucketlistItemCreateView(generics.CreateAPIView):
-    # post '/bucketlists/<id>/items/'
-    pass
+    # post '/bucketlists/<pk>/items/'
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = BucketListItem.objects.all()
+    serializer_class = BucketlistItemSerializer
+
+    def perform_create(self, serializer):
+        primary_key = self.kwargs.get('pk')
+        associated_bucket = BucketList(pk=primary_key)
+        serializer.save(bucketlist=associated_bucket)
 
 
 class BucketlistItemActionView(generics.UpdateAPIView, generics.DestroyAPIView):
-    # put, delete '/bucketlists/<id>/items/<item_id>'
+    # put, delete '/bucketlists/<pk>/items/<pk_item>'
     pass
