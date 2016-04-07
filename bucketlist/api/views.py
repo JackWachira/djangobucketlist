@@ -21,8 +21,22 @@ class BucketListView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         # queryset should only have bucketlists of logged in user
-        logged_in_user = self.request.user
-        return BucketList.objects.all().filter(user=logged_in_user)
+        q = self.request.query_params.get('q', None)
+
+        if q is None:
+            logged_in_user = self.request.user
+            return BucketList.objects.all().filter(user=logged_in_user)
+        else:
+            logged_in_user = self.request.user
+            bucketlists = BucketList.objects.all().filter(user=logged_in_user)
+
+            search_results = []
+
+            for bucket in bucketlists:
+                if q in bucket.name:
+                    search_results.append(bucket)
+
+            return search_results
 
     def perform_create(self, serializer):
         # set owner of bucketlist to be current logged in user
