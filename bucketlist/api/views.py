@@ -1,9 +1,17 @@
 from api.models import BucketList, BucketListItem
-from api.serializers import BucketlistSerializer, BucketlistItemSerializer
+from api.serializers import (BucketlistSerializer, BucketlistItemSerializer,
+                             UserSerializer)
 from rest_framework import generics
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from api.permissions import IsOwner
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+
+
+class SignUpAPIView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class BucketListView(generics.ListCreateAPIView):
@@ -53,7 +61,8 @@ class BucketlistItemCreateView(generics.CreateAPIView):
         serializer.save(bucketlist=associated_bucket)
 
 
-class BucketlistItemActionView(generics.UpdateAPIView, generics.DestroyAPIView):
+class BucketlistItemActionView(generics.UpdateAPIView,
+                               generics.DestroyAPIView):
     # put, delete '/bucketlists/<pk>/items/<pk_item>'
     serializer_class = BucketlistItemSerializer
     queryset = BucketListItem.objects.all()
