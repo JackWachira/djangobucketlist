@@ -12,7 +12,7 @@ class BucketList(models.Model):
     date_created = models.DateField(auto_now_add=True, editable=False)
     date_updated = models.DateField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,
-                             default=1, editable=False)  # like created_by
+                             default=1)  # like created_by
 
     def __unicode__(self):
         return u'%s' % self.name
@@ -25,8 +25,7 @@ class BucketListItem(models.Model):
     date_updated = models.DateField(auto_now=True)
     done = models.BooleanField(default=False)
     bucketlist = models.ForeignKey(BucketList, on_delete=models.CASCADE,
-                                   related_name="items", default=1,
-                                   editable=False)
+                                   related_name="items", default=1)
 
     def __unicode__(self):
         return u'%s' % self.name

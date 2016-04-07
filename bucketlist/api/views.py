@@ -2,31 +2,48 @@ from api.models import BucketList, BucketListItem
 from api.serializers import BucketlistSerializer, BucketlistItemSerializer
 from rest_framework import generics
 from rest_framework import permissions
+from django.shortcuts import get_object_or_404
+from api.permissions import IsOwner
 
 
-# Create your views here.
 class BucketListView(generics.ListCreateAPIView):
     # get, post '/bucketlists/'
-    queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwner)
+
+    def get_queryset(self):
+        # queryset should only have bucketlists of logged in user
+        logged_in_user = self.request.user
+        return BucketList.objects.all().filter(user=logged_in_user)
 
     def perform_create(self, serializer):
         # set owner of bucketlist to be current logged in user
         # when creating
-        serializer.save(user=self.request.user)
+        logged_in_user = self.request.user
+        serializer.save(user=logged_in_user)
 
 
 class BucketListDetailView(generics.RetrieveUpdateDestroyAPIView):
     # get, put, delete '/bucketlists/<pk>'
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwner)
+
+    def get_queryset(self):
+        try:
+            logged_in_user = self.request.user
+            pk_of_bucket = self.kwargs.get('pk')
+
+            bucketlist = BucketList.objects.filter(user=logged_in_user,
+                                                   pk=pk_of_bucket)
+            return bucketlist
+        except BucketList.DoesNotExist:
+            raise Http404("Not found")
 
 
 class BucketlistItemCreateView(generics.CreateAPIView):
     # post '/bucketlists/<pk>/items/'
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwner)
     queryset = BucketListItem.objects.all()
     serializer_class = BucketlistItemSerializer
 
@@ -38,4 +55,5 @@ class BucketlistItemCreateView(generics.CreateAPIView):
 
 class BucketlistItemActionView(generics.UpdateAPIView, generics.DestroyAPIView):
     # put, delete '/bucketlists/<pk>/items/<pk_item>'
-    pass
+    serializer_class = BucketlistItemSerializer
+    queryset = BucketListItem.objects.all()
