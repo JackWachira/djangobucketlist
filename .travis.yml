@@ -1,0 +1,20 @@
+language: python
+python:
+  - "2.7"
+services:
+  - postgresql
+
+branches:
+  only:
+    - master
+    - feature-review
+
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
+
+script:
+  - python bucketlist/manage.py test bucketlist/api/
+
+after_success:
+  - coveralls
