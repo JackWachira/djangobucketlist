@@ -12,6 +12,22 @@ from rest_framework.authtoken.models import Token
 class SignUpAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def perform_create(self, serializer):
+        username = self.request.data['username']
+        email = self.request.data['email']
+        password = self.request.data['password']
+
+        # serializer.save(username=username, email=email, password=password)
+
+        user = User.objects.create(
+            username=username,
+            email=email,
+        )
+
+        user.set_password('password')
+        user.save()
 
 
 class BucketListView(generics.ListCreateAPIView):

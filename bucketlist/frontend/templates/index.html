@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
+{% block other_css %}
+<link href="{% static "css/custom.css" %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
@@ -10,7 +16,6 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <!--<span class="icon-bar"></span> -->
                 </button>
                 <a class="navbar-brand" href="#">Ditter</a>
             </div>
@@ -21,11 +26,8 @@
                         <a href="#">About</a>
                     </li>
                     <li>
-                        <a href="https://github.com/andela-aomondi/djangobucketlist">Code</a>
+                        <a href="https://github.com/andela-aomondi/djangobucketlist" target="_blank">Code</a>
                     </li>
-                    <!--<li>
-                        <a href="#">Contact</a>
-                    </li> -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -41,11 +43,76 @@
                 <h1>Here Is The Big Picture</h1>
                 <p>I won't live forever. Neither will you.
                 Do what you've always wanted to do. Today.</p>
-                <button type="button" class="btn btn-default">Sign Up</button>
-                <button type="button" class="btn btn-default">Login</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#loginModal">Login</button>
             </div>
         </div>
         <!-- /.row -->
     </div>
     <!-- /.container -->
+
+    <!-- Modals -->
+    <!-- Sign up modal -->
+    <div id="signUpModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Sign Up for Ditter</h4>
+          </div>
+          <div class="modal-body">
+            <form class="" id="signUpForm">
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email">
+              </div>
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" name="username">
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password">
+              </div>
+              <button type="submit" id="doSignUp" class="btn btn-default">Sign Up</button>
+              <p></p>
+              <div id="signUpMessage">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /. Sign up modal -->
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login to your Ditter</h4>
+          </div>
+          <div class="modal-body">
+            <form class="" id="loginForm">
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" name="username">
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password">
+              </div>
+              <button type="submit" id="doLogin" class="btn btn-default">Login</button>
+              <p></p>
+              <div id="loginMessage">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /. Login Modal -->
 {% endblock %}

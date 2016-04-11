@@ -6,3 +6,11 @@ from django.views.generic import View
 class HomePageView(View):
     def get(self, request, **kwargs):
         return render(request, 'index.html', context=None)
+
+
+class AccountView(View):
+    def get(self, request, **kwargs):
+        context = {
+            "user": request.user,
+        }
+        return render(request, 'account.html', context=None)
