@@ -19,15 +19,8 @@ class SignUpAPIView(generics.CreateAPIView):
         email = self.request.data['email']
         password = self.request.data['password']
 
-        # serializer.save(username=username, email=email, password=password)
-
-        user = User.objects.create(
-            username=username,
-            email=email,
-        )
-
-        user.set_password('password')
-        user.save()
+        user = User.objects.create_user(username=username, email=email, password=password)
+        token = Token.objects.create(user=user)
 
 
 class BucketListView(generics.ListCreateAPIView):
