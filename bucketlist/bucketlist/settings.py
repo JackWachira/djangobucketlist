@@ -108,6 +108,16 @@ if 'test' in sys.argv:
             'NAME': 'testdb',
         }
     }
+elif os.getenv('TRAVIS_BUILD', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'bucketlist',
+            'USER': 'travis',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',
+        }
+    }
 else:
     DATABASES = {
         'default': {

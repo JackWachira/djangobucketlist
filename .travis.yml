@@ -14,6 +14,8 @@ install:
   - pip install coveralls
 
 script:
+  - python bucketlist/manage.py makemigrations
+  - python bucketlist/manage.py migrate
   - python bucketlist/manage.py test bucketlist/api/
 
 after_success:
