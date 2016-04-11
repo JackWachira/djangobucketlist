@@ -6,3 +6,4 @@ migrations/
 bucketlist/bucketlist/settings.pyc
 .DS_Store
 staticfiles/
+testdb
