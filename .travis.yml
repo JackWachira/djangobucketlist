@@ -1,8 +1,6 @@
 language: python
 python:
   - "2.7"
-services:
-  - postgresql
 
 branches:
   only:
@@ -12,6 +10,9 @@ branches:
 install:
   - pip install -r requirements.txt
   - pip install coveralls
+
+env:
+  - DB=sqlite
 
 script:
   - python bucketlist/manage.py makemigrations

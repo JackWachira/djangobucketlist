@@ -111,11 +111,8 @@ if 'test' in sys.argv:
 elif os.getenv('TRAVIS_BUILD', None):
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'bucketlist',
-            'USER': 'travis',
-            'PASSWORD': '',
-            'HOST': '127.0.0.1',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'testdb',
         }
     }
 else:
