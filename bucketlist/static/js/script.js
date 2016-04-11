@@ -82,6 +82,47 @@ $(document).ready(function(){
 // Creating a bucketlist
 // *****************************************************************************//
 
+
+// *****************************************************************************//
+// Showing all bucketlists
+$(document).ready(function(){
+  var pathname = window.location.pathname
+  
+  // only run on account page
+  if(pathname == "/account/"){
+    $.ajax({
+      type: "GET",
+      beforeSend: function (request)
+            {
+                request.setRequestHeader("Authorization", localStorage.getItem("token"));
+            },
+      url: "/api/bucketlists/",
+      async: true,
+      contentType: "application/json",
+      complete: function (data, status) {
+        html = "";
+
+        json_data = JSON.parse(data.responseText);
+
+        console.log(json_data);
+        
+        $("#bucketlists").html("<h1>Hi</h1>");
+      }
+    });
+  }
+});
+// *****************************************************************************//
+
 // *****************************************************************************//
 // Logging out
+$(document).ready(function(){
+  $('#bs-example-navbar-collapse-1').on('click','#logout', function(e) {   
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("You clicked foo! good work");
+    console.log(e);
+    localStorage.removeItem("token");
+    window.location = "/";
+  });
+});
 // *****************************************************************************//
