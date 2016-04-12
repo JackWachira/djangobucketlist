@@ -1,4 +1,5 @@
 from api.models import BucketList, BucketListItem
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 

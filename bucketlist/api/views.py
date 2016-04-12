@@ -87,5 +87,6 @@ class BucketlistItemCreateView(generics.CreateAPIView):
 class BucketlistItemActionView(generics.UpdateAPIView,
                                generics.DestroyAPIView):
     # put, delete '/bucketlists/<pk>/items/<pk_item>'
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = BucketlistItemSerializer
     queryset = BucketListItem.objects.all()

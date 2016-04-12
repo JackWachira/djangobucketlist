@@ -1,7 +1,6 @@
 env/
 *.pyc
 /*.pyc
-migrations/
 .coverage
 bucketlist/bucketlist/settings.pyc
 .DS_Store
