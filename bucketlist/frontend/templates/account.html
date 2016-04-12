@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
+{% block other_css %}
+<link href="{% static "css/account.css" %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
