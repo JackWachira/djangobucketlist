@@ -179,56 +179,9 @@ function showBucketLists(){
 
 
 // *****************************************************************************//
-// Showing all bucketlists on page load
+// Showing all bucketlists on account page load
 $(document).ready(function(){
-  var pathname = window.location.pathname
-  
-  // only run on account page
-  if(pathname == "/account/"){
-    $.ajax({
-      type: "GET",
-      beforeSend: function (request)
-            {
-                request.setRequestHeader("Authorization", localStorage.getItem("token"));
-            },
-      url: "/api/bucketlists/",
-      async: true,
-      contentType: "application/json",
-      complete: function (data, status) {
-        html = "";
-
-        json_data = JSON.parse(data.responseText);
-
-        console.log(json_data);
-
-        length_of_results = json_data.results.length;
-
-        console.log(length_of_results);
-
-        if(length_of_results === 0){
-          html += "<div class='jumbotron'>";
-          html += "<h3>You have nothing here.</h3>";
-          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Create Bucketlist</a>";
-          html += "</div>";
-          $("#bucketlists").html(html);
-        } else if(length_of_results > 0){
-          html += "<div class='page-header'>";
-          html += "<h1>Your bucketlists</h1>";
-          html += "</div>";
-
-          bucketlists = json_data.results;
-
-          for(var i = 0; i < length_of_results; i++){ 
-            html += "<div class='panel panel-info'>";
-            html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
-            html += "<div class='panel-body'></div>";
-            html += "</div>";          
-          }    
-          $("#bucketlists").html(html);
-        }
-      }
-    });
-  }
+  showBucketLists()
 });
 // *****************************************************************************//
 
