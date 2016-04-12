@@ -166,7 +166,9 @@ function showBucketLists(){
           for(var i = 0; i < length_of_results; i++){ 
             html += "<div class='panel panel-info'>";
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
-            html += "<div class='panel-body'></div>";
+            html += "<div class='panel-body'>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary delete_bucket'>Delete Bucketlist</button>";
+            html += "</div>";
             html += "</div>";          
           }    
           $("#bucketlists").html(html);
@@ -177,11 +179,48 @@ function showBucketLists(){
 }
 // *****************************************************************************//
 
+// *****************************************************************************//
+// Function to delete bucketlists
+function deleteBucketList(id){
+  var pathname = window.location.pathname
+  
+  // only run on account page
+  if(pathname == "/account/"){
+    $.ajax({
+      type: "DELETE",
+      beforeSend: function (request)
+            {
+                request.setRequestHeader("Authorization", localStorage.getItem("token"));
+            },
+      url: "/api/bucketlists/" + id,
+      async: true,
+      contentType: "application/json",
+      complete: function (data, status) {
+        console.log(status);
+        if(status === "nocontent"){
+          showBucketLists();
+        }
+      }
+    });
+  }
+}
+// *****************************************************************************//
+
+// *****************************************************************************//
+// Delete a bucketlist
+$(document).ready(function(){
+  $(document).on('click', '.delete_bucket', function(event){
+    var id = $(this).attr('id');
+    deleteBucketList(id);
+  });
+});
+// *****************************************************************************//
+
 
 // *****************************************************************************//
 // Showing all bucketlists on account page load
 $(document).ready(function(){
-  showBucketLists()
+  showBucketLists();
 });
 // *****************************************************************************//
 
