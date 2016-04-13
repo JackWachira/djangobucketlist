@@ -6,6 +6,10 @@
 }
 
 .panel {
-    width: 500px;
+    width: 550px;
+    margin: 5px;
+}
+
+button {
     margin: 10px;
 }

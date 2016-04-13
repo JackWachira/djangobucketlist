@@ -118,7 +118,7 @@ $(document).ready(function(){
               $("#bucketlistCreationMessage").html("")
             }, 1200);
 
-            showBucketLists()
+            showBucketLists();
           }
         }
       });
@@ -168,7 +168,9 @@ function showBucketLists(){
             html += "<div class='panel panel-info'>";
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
             html += "<div class='panel-body'>";
-            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary delete_bucket'>Delete Bucketlist</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary delete_bucket'>Delete</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>Items</button>";
             html += "</div>";
             html += "</div>";          
           }
@@ -182,12 +184,47 @@ function showBucketLists(){
 // *****************************************************************************//
 
 // *****************************************************************************//
+// Function to update a bucketlist
+function updateBucketList(id, data){
+  $.ajax({
+    type: "PUT",
+    beforeSend: function (request)
+          {
+              request.setRequestHeader("Authorization", localStorage.getItem("token"));
+          },
+    url: "/api/bucketlists/" + id,
+    data: JSON.stringify(data),
+    async: true,
+    contentType: "application/json",
+    complete: function (data, status) {
+      if(status === "success"){
+        // create a message for user
+        html = "<div class='alert alert-success' role='alert'>Bucketlist Updated</div>";
+        $("#bucketlistUpdateMessage").html(html);
+
+        setTimeout(function(){
+          $("#updateBucketlist").modal('toggle');
+          $("#bucketlistUpdateMessage").html("");
+        }, 1200);
+
+        showBucketLists();
+      } else if(status === "error"){
+        // create a message for user
+        html = "<div class='alert alert-danger' role='alert'>Error Updating Bucketlist</div>"
+        $("#bucketlistUpdateMessage").html(html)
+      }
+    }
+  });  
+}
+// *****************************************************************************//
+
+// *****************************************************************************//
 // Function to delete bucketlists
 function deleteBucketList(id){
   var pathname = window.location.pathname
   
   // only run on account page
-  if(pathname == "/account/"){
+  if(pathname === "/account/"){
     $.ajax({
       type: "DELETE",
       beforeSend: function (request)
@@ -207,6 +244,33 @@ function deleteBucketList(id){
   }
 }
 // *****************************************************************************//
+
+// *****************************************************************************//
+// Update a bucketlist
+var updateId = 0
+var updateData = {}
+$(document).ready(function(){
+  var pathname = window.location.pathname
+  
+  // only run on account page
+  if(pathname == "/account/"){
+    $(document).on('click', '.update_bucket', function(event){
+      updateId = $(this).attr('id');
+    });
+    $(document).on('click', '#doBucketlistUpdate', function(event){
+      event.preventDefault();
+
+      updateData = $('#updateBucketlistForm').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = String(item.value);
+        return obj;
+      }, {});
+
+      updateBucketList(updateId, updateData);
+    });
+  }
+});
+// *****************************************************************************//
+
 
 // *****************************************************************************//
 // Delete a bucketlist
