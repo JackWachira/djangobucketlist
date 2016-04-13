@@ -1,4 +1,11 @@
 // *****************************************************************************//
+// Enable any tooltips
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+// *****************************************************************************//
+
+// *****************************************************************************//
 // Sending a create account request
 $(document).ready(function(){
   $("#doSignUp").click(function(event){
@@ -235,7 +242,6 @@ function deleteBucketList(id){
       async: true,
       contentType: "application/json",
       complete: function (data, status) {
-        console.log(status);
         if(status === "nocontent"){
           showBucketLists();
         }
@@ -330,7 +336,6 @@ $(document).ready(function(){
 
 // function to call to show items
 function showItems(details_data){
-  console.log(JSON.parse(details_data));
   details = JSON.parse(details_data);
   var html = "";
   if(details.items.length === 0){
@@ -369,8 +374,8 @@ function showItems(details_data){
       html += "<td>" + item.done + "</td>";
       // actions
       html += "<td>";
-      html += "<button class='btn' b='" + item.bucketlist + "' i='" + item.id + "' style='margin-left: 5px;' id='complete_item'><span class='glyphicon glyphicon-ok'></span></button>";
-      html += "<button class='btn' b='" + item.bucketlist + "' i='" + item.id + "' style='margin-left: 5px;' id='do_item_delete'><span class='glyphicon glyphicon-remove'></span></button>";
+      html += "<button data-toggle='tooltip' title='Mark as Done' class='btn' b='" + item.bucketlist + "' i='" + item.id + "' style='margin-left: 5px;' id='complete_item'><span class='glyphicon glyphicon-ok'></span></button>";
+      html += "<button data-toggle='tooltip' title='Delete item' class='btn' b='" + item.bucketlist + "' i='" + item.id + "' style='margin-left: 5px;' id='do_item_delete'><span class='glyphicon glyphicon-remove'></span></button>";
       html += "</td>";
       // end actions
       html += "</tr>";
@@ -543,8 +548,7 @@ $(document).ready(function(){
   $('#bs-example-navbar-collapse-1').on('click','#logout', function(e) {
     e.preventDefault();
     e.stopPropagation();
-    console.log("You clicked foo! good work");
-    console.log(e);
+    
     localStorage.removeItem("token");
     localStorage.removeItem("details");
     window.location = "/";
