@@ -163,6 +163,7 @@ function showBucketLists(){
 
           bucketlists = json_data.results;
 
+          html += "<div class='flex-container'>";
           for(var i = 0; i < length_of_results; i++){ 
             html += "<div class='panel panel-info'>";
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
@@ -170,7 +171,8 @@ function showBucketLists(){
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary delete_bucket'>Delete Bucketlist</button>";
             html += "</div>";
             html += "</div>";          
-          }    
+          }
+          html += "</div>";    
           $("#bucketlists").html(html);
         }
       }

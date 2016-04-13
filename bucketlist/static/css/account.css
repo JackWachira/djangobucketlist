@@ -1,0 +1,11 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.panel {
+    width: 500px;
+    margin: 10px;
+}
