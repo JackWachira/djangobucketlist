@@ -13,4 +13,12 @@ class AccountView(View):
         context = {
             "user": request.user,
         }
-        return render(request, 'account.html', context=None)
+        return render(request, 'account.html', context=context)
+
+
+class ItemView(View):
+    def get(self, request, **kwargs):
+        context = {
+            "user": request.user,
+        }
+        return render(request, 'item_view.html', context=context)

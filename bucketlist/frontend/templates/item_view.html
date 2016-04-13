@@ -1,11 +1,5 @@
 {% extends 'base.html' %}
 
-{% load staticfiles %}
-
-{% block other_css %}
-<link href="{% static "css/account.css" %}" rel="stylesheet">
-{% endblock %}
-
 {% block content %}
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
@@ -23,7 +17,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#createBucketlist">Create Bucketlist</a>
+                    <a href="/account/">Back to Bucketlists</a>
                 </li>
                 <li>
                     <a href="#" id="#logout">Logout</a>
@@ -39,54 +33,40 @@
 </nav>
 <!-- /.Navigation -->
 
-<!-- Create bucketlist Modal -->
-<div id="createBucketlist" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<!-- page content -->
+<div class="container">
+  <div id="items_header">
+  </div>
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Create Bucketlist</h4>
-            </div>
-            <div class="modal-body">
-                <form class="" id="newBucketlistForm">
-                    <div class="form-group">
-                        <label for="name">Bucketlist Name:</label>
-                        <input type="text" class="form-control" name="name">
-                    </div>
-
-                    <button type="submit" id="doBucketlistCreation" class="btn btn-default">Create</button>
-                    <p></p>
-                    <div id="bucketlistCreationMessage">
-                    </div>
-                </form>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div id="items">
+      </div>
     </div>
+  </div>
 </div>
-<!-- /.Create bucketlist Modal -->
 
-<!-- Update bucketlist Modal -->
-<div id="updateBucketlist" class="modal fade" role="dialog">
+<!--Modals-->
+<!-- Add new item Modal -->
+<div id="newItemModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Update Bucketlist</h4>
+                <h4 class="modal-title">New Item</h4>
             </div>
             <div class="modal-body">
-                <form class="" id="updateBucketlistForm">
+                <form class="" id="newItemForm">
                     <div class="form-group">
-                        <label for="name">New Bucketlist Name:</label>
+                        <label for="name">New Item Name:</label>
                         <input type="text" class="form-control" name="name">
                     </div>
 
-                    <button type="submit" id="doBucketlistUpdate" class="btn btn-default">Update</button>
+                    <button type="submit" id="doItemCreate" class="btn btn-default">Create Item</button>
                     <p></p>
-                    <div id="bucketlistUpdateMessage">
+                    <div id="itemCreationMessage">
                     </div>
                 </form>
             </div>
@@ -94,10 +74,4 @@
     </div>
 </div>
 <!-- /.Update bucketlist Modal -->
-
-<!-- page content -->
-<div class="container">
-  <div id="bucketlists">
-  </div>
-</div>
 {% endblock %}
