@@ -161,11 +161,14 @@ function showBucketLists(){
           html += "<div class='jumbotron'>";
           html += "<h3>You have nothing here.</h3>";
           html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Create Bucketlist</a>";
+          html += "<button class='btn btn-primary' id='logout_link'>Logout</a>"
           html += "</div>";
           $("#bucketlists").html(html);
         } else if(length_of_results > 0){
           html += "<div class='page-header'>";
           html += "<h1>Your bucketlists</h1>";
+          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Add Bucketlist</button>";
+          html += "<button class='btn btn-primary' id='logout_link'>Logout</a>"
           html += "</div>";
 
           bucketlists = json_data.results;
@@ -545,10 +548,7 @@ $(document).on('click', '#do_item_delete', function(event){
 // *****************************************************************************//
 // Logging out
 $(document).ready(function(){
-  $('#bs-example-navbar-collapse-1').on('click','#logout', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
+  $(document).on('click', '#logout_link', function(event){ 
     localStorage.removeItem("token");
     localStorage.removeItem("details");
     window.location = "/";
