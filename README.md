@@ -41,6 +41,54 @@ This is a bucketlist application written in Python/Django.
 | PUT /api/bucketlists/id/items/id 	    | Update a bucketlist item    	      |
 | DELETE /api/bucketlists/id/items/id 	| Update a bucketlist item    	      |
 
+## Usage
+
+### Heroku
+
+You can visit the site on the [Ditter Heroku Page](https://ditter.herokuapp.com).
+
+For developers, the API docs can be accessed on [Ditter API Docs](https://ditter.herokuapp.com/docs/). 
+
+#### Example usage (Note: Examples use [HTTPie](https://github.com/jkbrzt/httpie) to send requests)
+
+Registration:
+
+```
+http -f POST ditter.herokuapp.com/api/auth/register/  username=test password=1234 email=test@tester.com
+
+HTTP/1.1 201 Created
+Allow: POST, OPTIONS
+Connection: keep-alive
+Content-Type: application/json
+Date: Fri, 15 Apr 2016 09:04:03 GMT
+Server: gunicorn/19.4.5
+Transfer-Encoding: chunked
+Vary: Accept
+Via: 1.1 vegur
+X-Frame-Options: SAMEORIGIN
+
+```
+
+Login
+
+```
+http -f POST ditter.herokuapp.com/api/auth/login/  username=test password=1234
+
+HTTP/1.1 200 OK
+Allow: POST, OPTIONS
+Connection: keep-alive
+Content-Type: application/json
+Date: Fri, 15 Apr 2016 09:06:17 GMT
+Server: gunicorn/19.4.5
+Transfer-Encoding: chunked
+Via: 1.1 vegur
+X-Frame-Options: SAMEORIGIN
+
+{
+    "token": "b2be7eb7e5eebd4c3d348285249ba819868e7d89"
+}
+```
+
 ## Testing
 
 In the project root folder, run command `python bucketlist/manage.py test bucketlist/api`
