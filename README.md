@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/andela-aomondi/djangobucketlist.svg?branch=master)](https://travis-ci.org/andela-aomondi/djangobucketlist)
 [![Coverage Status](https://coveralls.io/repos/github/andela-aomondi/djangobucketlist/badge.svg?branch=feature-review)](https://coveralls.io/github/andela-aomondi/djangobucketlist?branch=feature-review)
 ![MIT License Badge](https://img.shields.io/badge/license-mit-blue.svg)
+[![Code Health](https://landscape.io/github/andela-aomondi/djangobucketlist/feature-review/landscape.svg?style=flat)](https://landscape.io/github/andela-aomondi/djangobucketlist/feature-review)
+
 
 ## Welcome to Ditter
 
