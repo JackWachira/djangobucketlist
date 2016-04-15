@@ -161,14 +161,12 @@ function showBucketLists(){
           html += "<div class='jumbotron'>";
           html += "<h3>You have nothing here.</h3>";
           html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Create Bucketlist</a>";
-          html += "<button class='btn btn-primary' id='logout_link'>Logout</a>"
           html += "</div>";
           $("#bucketlists").html(html);
         } else if(length_of_results > 0){
-          html += "<div class='page-header'>";
-          html += "<h1>Your bucketlists</h1>";
+          html += "<div class='jumbotron'>";
+          html += "<h3>Your bucketlists</h3>";
           html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Add Bucketlist</button>";
-          html += "<button class='btn btn-primary' id='logout_link'>Logout</a>"
           html += "</div>";
 
           bucketlists = json_data.results;
