@@ -501,6 +501,62 @@ $(document).on('click', '#complete_item', function(event){
 // *****************************************************************************//
 
 // *****************************************************************************//
+// Search functionality
+$(document).ready(function(){
+  $(document).on('keyup', '#search', function(event){
+    q = $('#search').val()
+
+    $.ajax({
+      type: "GET",
+      beforeSend: function (request)
+            {
+                request.setRequestHeader("Authorization", localStorage.getItem("token"));
+            },
+      url: "/api/bucketlists?q=" + q,
+      async: true,
+      contentType: "application/json",
+      complete: function (data, status) {
+        html = "";
+
+        json_data = JSON.parse(data.responseText);
+
+        length_of_results = json_data.results.length;
+
+        if(length_of_results === 0){
+          html += "<div class='jumbotron'>";
+          html += "<h3>You have no such bucketlist.</h3>";
+          html += "<a href='/account/' class='btn btn-primary'>Clear Search</a>";
+          html += "</div>";
+          $("#bucketlists").html(html);
+        } else if(length_of_results > 0){
+          html += "<div class='jumbotron'>";
+          html += "<h3>Your bucketlists matching search for '" + q + "'</h3>";
+          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Add Bucketlist</button>";
+          html += "</div>";
+
+          bucketlists = json_data.results;
+
+          html += "<div class='flex-container'>";
+          for(var i = 0; i < length_of_results; i++){
+            html += "<div class='panel panel-info'>";
+            html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
+            html += "<div class='panel-body'>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary delete_bucket'>Delete</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>Items</button>";
+            html += "</div>";
+            html += "</div>";
+          }
+          html += "</div>";
+          $("#bucketlists").html(html);
+        }
+      }
+    });
+  });
+});
+// *****************************************************************************//
+
+// *****************************************************************************//
 // Delete a bucketlist item
 $(document).on('click', '#do_item_delete', function(event){
   event.preventDefault();
@@ -546,7 +602,7 @@ $(document).on('click', '#do_item_delete', function(event){
 // *****************************************************************************//
 // Logging out
 $(document).ready(function(){
-  $(document).on('click', '#logout_link', function(event){ 
+  $(document).on('click', '#logout_link', function(event){
     localStorage.removeItem("token");
     localStorage.removeItem("details");
     window.location = "/";
