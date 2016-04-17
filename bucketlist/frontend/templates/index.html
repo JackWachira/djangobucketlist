@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#" data-toggle="modal" data-target="#aboutModal">About</a>
                     </li>
                     <li>
                         <a href="https://github.com/andela-aomondi/djangobucketlist" target="_blank">Code</a>
@@ -116,4 +116,22 @@
       </div>
     </div>
     <!-- /. Login Modal -->
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">This Is Andela</h4>
+          </div>
+          <div class="modal-body">
+            <p>This project was made with <span class='glyphicon glyphicon-heart'></span> by Amos Omondi for Andela Python Checkpoint 3.</p>
+            <p><strong>#TIA</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /. About Modal -->
 {% endblock %}
