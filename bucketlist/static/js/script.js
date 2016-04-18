@@ -176,7 +176,10 @@ function showBucketLists(){
             html += "<div class='panel panel-info'>";
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
             html += "<div class='panel-body'>";
-            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary delete_bucket'>Delete</button>";
+            html += "<h5>Date Created: " + moment(bucketlists[i].date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</h5>";
+            html += "</div>";
+            html += "<div class='panel-footer'>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-danger delete_bucket'>Delete</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>Items</button>";
             html += "</div>";
@@ -359,7 +362,6 @@ function showItems(details_data){
     html += "<tr class='headingTr'>";
     html += "<th>Name</th>";
     html += "<th>Date Created</th>";
-    html += "<th>Date Updated</th>";
     html += "<th>Completed</th>";
     html += "<th>Actions</th>";
     html += "</tr>";
@@ -370,14 +372,13 @@ function showItems(details_data){
 
       html += "<tr>";
       html += "<td>" + item.name + "</td>";
-      html += "<td>" + item.date_created + "</td>";
-      html += "<td>" + item.date_updated + "</td>";
+      html += "<td>" + moment(item.date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</td>";
       if(item.done === true){
         html += "<td>Yes</td>";
       } else if(item.done === false){
         html += "<td>No</td>";
       }
-          
+
       // actions
       html += "<td>";
       html += "<button data-toggle='tooltip' title='Mark as Done' class='btn' b='" + item.bucketlist + "' i='" + item.id + "' style='margin-left: 5px;' id='complete_item'><span class='glyphicon glyphicon-ok'></span></button>";
@@ -546,6 +547,9 @@ $(document).ready(function(){
             html += "<div class='panel panel-info'>";
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
             html += "<div class='panel-body'>";
+            html += "<h5>Date Created: " + moment(bucketlists[i].date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</h5>";
+            html += "</div>";
+            html += "<div class='panel-footer'>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary delete_bucket'>Delete</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>Items</button>";
