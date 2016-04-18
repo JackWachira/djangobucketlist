@@ -179,11 +179,16 @@ function showBucketLists(){
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
             html += "<div class='panel-body'>";
             html += "<h5>Date Created: " + moment(bucketlists[i].date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</h5>";
+            if(bucketlists[i].items.length === 0){
+              html += "<h5>There are currently no items in this bucketlist</h5>";
+            } else if(bucketlists[i].items.length > 0) {
+              html += "<h5>Featured Item: " + bucketlists[i].items[0].name + "</h5>";
+            }
             html += "</div>";
             html += "<div class='panel-footer'>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-danger delete_bucket'>Delete</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
-            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>Items</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>See Items</button>";
             html += "</div>";
             html += "</div>";
           }
@@ -398,7 +403,7 @@ function showItems(details_data){
 // *****************************************************************************//
 
 // *****************************************************************************//
-// create a new bucketlist item
+// Create a new bucketlist item
 $(document).ready(function(){
   var pathname = window.location.pathname
 
@@ -552,11 +557,16 @@ $(document).ready(function(){
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
             html += "<div class='panel-body'>";
             html += "<h5>Date Created: " + moment(bucketlists[i].date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</h5>";
+            if(bucketlists[i].items.length === 0){
+              html += "<h5>There are currently no items in this bucketlist</h5>";
+            } else if(bucketlists[i].items.length > 0) {
+              html += "<h5>Featured Item: " + bucketlists[i].items[0].name + "</h5>";
+            }
             html += "</div>";
             html += "<div class='panel-footer'>";
-            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary delete_bucket'>Delete</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-danger delete_bucket'>Delete</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
-            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>Items</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>See Items</button>";
             html += "</div>";
             html += "</div>";
           }

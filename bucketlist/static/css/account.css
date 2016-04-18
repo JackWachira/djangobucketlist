@@ -13,3 +13,7 @@
 button {
     margin: 10px;
 }
+
+.btn-danger {
+  background-color: #653D2E;
+}
