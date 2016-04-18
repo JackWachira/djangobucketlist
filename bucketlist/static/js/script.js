@@ -354,9 +354,9 @@ function showItems(details_data){
     $("#items_header").html(html);
 
     html = "";
-    html += "<table class='table'>";
+    html += "<table class='flatTable'>";
     html += "<thead>";
-    html += "<tr>";
+    html += "<tr class='headingTr'>";
     html += "<th>Name</th>";
     html += "<th>Date Created</th>";
     html += "<th>Date Updated</th>";
@@ -372,7 +372,12 @@ function showItems(details_data){
       html += "<td>" + item.name + "</td>";
       html += "<td>" + item.date_created + "</td>";
       html += "<td>" + item.date_updated + "</td>";
-      html += "<td>" + item.done + "</td>";
+      if(item.done === true){
+        html += "<td>Yes</td>";
+      } else if(item.done === false){
+        html += "<td>No</td>";
+      }
+          
       // actions
       html += "<td>";
       html += "<button data-toggle='tooltip' title='Mark as Done' class='btn' b='" + item.bucketlist + "' i='" + item.id + "' style='margin-left: 5px;' id='complete_item'><span class='glyphicon glyphicon-ok'></span></button>";
