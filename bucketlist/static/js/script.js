@@ -24,16 +24,17 @@ $(document).ready(function(){
       contentType: "application/json",
       complete: function (data, status) {
         if (status == "error") {
-          html = "<div class='alert alert-danger' role='alert'>Oops! Unable to sign up.</div>"
-          $("#signUpMessage").html(html)
+          html = "<div class='alert alert-danger' role='alert'>Oops! Unable to sign up.</div>";
+          $("#signUpMessage").html(html);
         } else if(status == "success") {
           // create a message for user
-          html = "<div class='alert alert-success' role='alert'>Sign up successful.</div>"
-          $("#signUpMessage").html(html)
+          html = "<div class='alert alert-success' role='alert'>Sign up successful.</div>";
+          $("#signUpMessage").html(html);
 
           setTimeout(function(){
-            $("#signUpModal").modal('toggle')
-            $("#signUpMessage").html("")
+            $("#signUpModal").modal('toggle');
+            $("#signUpMessage").html("");
+            $("#signUpModal").find("input").val("");
           }, 1200);
         }
       }
@@ -74,7 +75,7 @@ $(document).ready(function(){
           localStorage.setItem("token", "Token " + parsed_data.token);
 
           setTimeout(function(){
-            $("#loginModal").modal('toggle')
+            $("#loginModal").modal('toggle');
           }, 1200);
 
           window.location = "/account/";
@@ -117,12 +118,13 @@ $(document).ready(function(){
             $("#bucketlistCreationMessage").html(html)
           } else if(status == "success") {
             // create a message for user
-            html = "<div class='alert alert-success' role='alert'>Bucketlist Created</div>"
-            $("#bucketlistCreationMessage").html(html)
+            html = "<div class='alert alert-success' role='alert'>Bucketlist Created</div>";
+            $("#bucketlistCreationMessage").html(html);
 
             setTimeout(function(){
-              $("#createBucketlist").modal('toggle')
-              $("#bucketlistCreationMessage").html("")
+              $("#createBucketlist").modal('toggle');
+              $("#bucketlistCreationMessage").html("");
+              $("#createBucketlist").find("input").val("");
             }, 1200);
 
             showBucketLists();
@@ -216,6 +218,7 @@ function updateBucketList(id, data){
         setTimeout(function(){
           $("#updateBucketlist").modal('toggle');
           $("#bucketlistUpdateMessage").html("");
+          $("#updateBucketlist").find("input").val("");
         }, 1200);
 
         showBucketLists();
@@ -423,16 +426,17 @@ $(document).ready(function(){
         contentType: "application/json",
         complete: function (data, status) {
           if (status == "error") {
-            html = "<div class='alert alert-danger' role='alert'>Unable to create item</div>"
-            $("#itemCreationMessage").html(html)
+            html = "<div class='alert alert-danger' role='alert'>Unable to create item</div>";
+            $("#itemCreationMessage").html(html);
           } else if(status == "success") {
             // create a message for user
-            html = "<div class='alert alert-success' role='alert'>Item Created</div>"
-            $("#itemCreationMessage").html(html)
+            html = "<div class='alert alert-success' role='alert'>Item Created</div>";
+            $("#itemCreationMessage").html(html);
 
             setTimeout(function(){
-              $("#newItemModal").modal('toggle')
-              $("#itemCreationMessage").html("")
+              $("#newItemModal").modal('toggle');
+              $("#itemCreationMessage").html("");
+              $("#newItemModal").find("input").val("");
             }, 1200);
 
             $.ajax({
