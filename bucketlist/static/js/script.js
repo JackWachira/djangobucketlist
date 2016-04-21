@@ -1,10 +1,10 @@
 // *****************************************************************************//
 // Sending a create account request
 $(document).ready(function(){
-  $("#doSignUp").click(function(event){
+  $("#do-sign-up").click(function(event){
     event.preventDefault();
 
-    var data = $('#signUpForm').serializeArray().reduce(function(obj, item) {
+    var data = $('#sign-up-form').serializeArray().reduce(function(obj, item) {
       obj[item.name] = String(item.value);
       return obj;
     }, {});
@@ -18,16 +18,16 @@ $(document).ready(function(){
       complete: function (data, status) {
         if (status == "error") {
           html = "<div class='alert alert-danger' role='alert'>Oops! User already exists. Change your details and try again.</div>";
-          $("#signUpMessage").html(html);
+          $("#sign-up-message").html(html);
         } else if(status == "success") {
           // create a message for user
           html = "<div class='alert alert-success' role='alert'>Sign up successful.</div>";
-          $("#signUpMessage").html(html);
+          $("#sign-up-message").html(html);
 
           setTimeout(function(){
-            $("#signUpModal").modal('toggle');
-            $("#signUpMessage").html("");
-            $("#signUpModal").find("input").val("");
+            $("#sign-up-modal").modal('toggle');
+            $("#sign-up-message").html("");
+            $("#sign-up-modal").find("input").val("");
           }, 1200);
         }
       }
@@ -40,10 +40,10 @@ $(document).ready(function(){
 // *****************************************************************************//
 // Sending a login request
 $(document).ready(function(){
-  $("#doLogin").click(function(event){
+  $("#do-login").click(function(event){
     event.preventDefault();
 
-    var data = $('#loginForm').serializeArray().reduce(function(obj, item) {
+    var data = $('#login-form').serializeArray().reduce(function(obj, item) {
       obj[item.name] = String(item.value);
       return obj;
     }, {});
@@ -57,18 +57,18 @@ $(document).ready(function(){
       complete: function (data, status) {
         if (status == "error") {
           html = "<div class='alert alert-danger' role='alert'>You have entered a wrong combination of username and password. Please try again.</div>"
-          $("#loginMessage").html(html)
+          $("#login-message").html(html)
         } else if(status == "success") {
           // create a message for user
           html = "<div class='alert alert-success' role='alert'>You are now logged in.</div>"
-          $("#loginMessage").html(html)
+          $("#login-message").html(html)
 
           // save token to local storage
           parsed_data = JSON.parse(data.responseText)
           localStorage.setItem("token", "Token " + parsed_data.token);
 
           setTimeout(function(){
-            $("#loginModal").modal('toggle');
+            $("#login-modal").modal('toggle');
           }, 1200);
 
           window.location = "/account/";
@@ -87,10 +87,10 @@ $(document).ready(function(){
 
   // only run on account page
   if(pathname == "/account/"){
-    $("#doBucketlistCreation").click(function(event){
+    $("#do-bucketlist-creation").click(function(event){
       event.preventDefault();
 
-      var data = $('#newBucketlistForm').serializeArray().reduce(function(obj, item) {
+      var data = $('#new-bucketlist-form').serializeArray().reduce(function(obj, item) {
         obj[item.name] = String(item.value);
         return obj;
       }, {});
@@ -108,16 +108,16 @@ $(document).ready(function(){
         complete: function (data, status) {
           if (status == "error") {
             html = "<div class='alert alert-danger' role='alert'>Unable to create bucketlist. Try another name.</div>"
-            $("#bucketlistCreationMessage").html(html)
+            $("#bucketlist-creation-message").html(html)
           } else if(status == "success") {
             // create a message for user
             html = "<div class='alert alert-success' role='alert'>Bucketlist Created</div>";
-            $("#bucketlistCreationMessage").html(html);
+            $("#bucketlist-creation-message").html(html);
 
             setTimeout(function(){
-              $("#createBucketlist").modal('toggle');
-              $("#bucketlistCreationMessage").html("");
-              $("#createBucketlist").find("input").val("");
+              $("#create-bucketlist-modal").modal('toggle');
+              $("#bucketlist-creation-message").html("");
+              $("#create-bucketlist-modal").find("input").val("");
             }, 1200);
 
             showBucketLists();
@@ -155,13 +155,13 @@ function showBucketLists(){
         if(length_of_results === 0){
           html += "<div class='jumbotron'>";
           html += "<h3>You have nothing here.</h3>";
-          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Create Bucketlist</a>";
+          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#create-bucketlist-modal'>Create Bucketlist</a>";
           html += "</div>";
           $("#bucketlists").html(html);
         } else if(length_of_results > 0){
           html += "<div class='jumbotron'>";
           html += "<h3>Your bucketlists</h3>";
-          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Add Bucketlist</button>";
+          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#create-bucketlist-modal'>Add Bucketlist</button>";
           html += "</div>";
 
           bucketlists = json_data.results;
@@ -180,7 +180,7 @@ function showBucketLists(){
             html += "</div>";
             html += "<div class='panel-footer'>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-danger delete_bucket'>Delete</button>";
-            html += "<button id='" + bucketlists[i].id + "' name='" + bucketlists[i].name + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
+            html += "<button id='" + bucketlists[i].id + "' name='" + bucketlists[i].name + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#update-bucketlist'>Edit</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>See Items</button>";
             html += "</div>";
             html += "</div>";
@@ -211,11 +211,11 @@ function updateBucketList(id, data){
       if(status === "success"){
         // create a message for user
         html = "<div class='alert alert-success' role='alert'>Bucketlist Updated</div>";
-        $("#bucketlistUpdateMessage").html(html);
+        $("#bucketlist-update-message").html(html);
 
         setTimeout(function(){
-          $("#updateBucketlist").modal('toggle');
-          $("#bucketlistUpdateMessage").html("");
+          $("#update-bucketlist").modal('toggle');
+          $("#bucketlist-update-message").html("");
           $("#updateBucketlist").find("input").val("");
         }, 1200);
 
@@ -223,7 +223,7 @@ function updateBucketList(id, data){
       } else if(status === "error"){
         // create a message for user
         html = "<div class='alert alert-danger' role='alert'>Error Updating Bucketlist</div>"
-        $("#bucketlistUpdateMessage").html(html)
+        $("#bucketlist-update-message").html(html)
       }
     }
   });
@@ -268,12 +268,12 @@ $(document).ready(function(){
     $(document).on('click', '.update_bucket', function(event){
       updateId = $(this).attr('id');
       updateName = $(this).attr('name');
-      $("#updateBucketlist").find("input").val(updateName);
+      $("#update-bucketlist").find("input").val(updateName);
     });
-    $(document).on('click', '#doBucketlistUpdate', function(event){
+    $(document).on('click', '#do-bucketlist-update', function(event){
       event.preventDefault();
 
-      updateData = $('#updateBucketlistForm').serializeArray().reduce(function(obj, item) {
+      updateData = $('#update-bucketlist-form').serializeArray().reduce(function(obj, item) {
         obj[item.name] = String(item.value);
         return obj;
       }, {});
@@ -349,14 +349,14 @@ function showItems(details_data){
   if(details.items.length === 0){
     html += "<div class='jumbotron'>";
     html += "<h3>Bucketlist <span style='color: blue;'>" + details.name + "</span> has no items</h3>";
-    html += "<button class='btn btn-primary' data-toggle='modal' data-target='#newItemModal'>Create an item</a>";
+    html += "<button class='btn btn-primary' data-toggle='modal' data-target='#new-item-modal'>Create an item</a>";
     html += "</div>";
     $("#items_header").html(html);
     $("#items").html("");
   } else {
     html += "<div class='jumbotron'>";
     html += "<h3>Bucketlist <span style='color: blue;'>" + details.name + "</span> has the following items</h3>";
-    html += "<button class='btn btn-primary' data-toggle='modal' data-target='#newItemModal'>Add an item</a>";
+    html += "<button class='btn btn-primary' data-toggle='modal' data-target='#new-item-modal'>Add an item</a>";
     html += "</div>";
     $("#items_header").html(html);
 
@@ -404,7 +404,7 @@ $(document).ready(function(){
   var pathname = window.location.pathname
 
   if(pathname === "/item/"){
-    $(document).on('click', '#doItemCreate', function(event){
+    $(document).on('click', '#do-item-create', function(event){
       event.preventDefault();
 
       bucket = JSON.parse(localStorage.getItem('details'));
@@ -428,16 +428,16 @@ $(document).ready(function(){
         complete: function (data, status) {
           if (status == "error") {
             html = "<div class='alert alert-danger' role='alert'>Unable to create item</div>";
-            $("#itemCreationMessage").html(html);
+            $("#item-creation-message").html(html);
           } else if(status == "success") {
             // create a message for user
             html = "<div class='alert alert-success' role='alert'>Item Created</div>";
-            $("#itemCreationMessage").html(html);
+            $("#item-creation-message").html(html);
 
             setTimeout(function(){
-              $("#newItemModal").modal('toggle');
-              $("#itemCreationMessage").html("");
-              $("#newItemModal").find("input").val("");
+              $("#new-item-modal").modal('toggle');
+              $("#item-creation-message").html("");
+              $("#new-item-modal").find("input").val("");
             }, 1200);
 
             $.ajax({
@@ -542,7 +542,7 @@ $(document).ready(function(){
         } else if(length_of_results > 0){
           html += "<div class='jumbotron'>";
           html += "<h3>Your bucketlists matching search for '" + q + "'</h3>";
-          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#createBucketlist'>Add Bucketlist</button>";
+          html += "<button class='btn btn-primary' data-toggle='modal' data-target='#create-bucketlist-modal'>Add Bucketlist</button>";
           html += "</div>";
 
           bucketlists = json_data.results;
@@ -561,7 +561,7 @@ $(document).ready(function(){
             html += "</div>";
             html += "<div class='panel-footer'>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-danger delete_bucket'>Delete</button>";
-            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
+            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#update-bucketlist'>Edit</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>See Items</button>";
             html += "</div>";
             html += "</div>";
