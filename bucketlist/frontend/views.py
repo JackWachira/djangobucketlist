@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import TemplateView
 
 
 # Create your views here.
-class HomePageView(View):
+class HomePageView(TemplateView):
     def get(self, request, **kwargs):
         return render(request, 'index.html', context=None)
 
 
-class AccountView(View):
+class AccountView(TemplateView):
     def get(self, request, **kwargs):
         context = {
             "user": request.user,
@@ -16,7 +16,7 @@ class AccountView(View):
         return render(request, 'account.html', context=context)
 
 
-class ItemView(View):
+class ItemView(TemplateView):
     def get(self, request, **kwargs):
         context = {
             "user": request.user,
