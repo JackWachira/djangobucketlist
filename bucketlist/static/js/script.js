@@ -1,11 +1,4 @@
 // *****************************************************************************//
-// Enable any tooltips
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-// *****************************************************************************//
-
-// *****************************************************************************//
 // Sending a create account request
 $(document).ready(function(){
   $("#doSignUp").click(function(event){
@@ -24,7 +17,7 @@ $(document).ready(function(){
       contentType: "application/json",
       complete: function (data, status) {
         if (status == "error") {
-          html = "<div class='alert alert-danger' role='alert'>Oops! Unable to sign up.</div>";
+          html = "<div class='alert alert-danger' role='alert'>Oops! User already exists. Change your details and try again.</div>";
           $("#signUpMessage").html(html);
         } else if(status == "success") {
           // create a message for user
@@ -63,7 +56,7 @@ $(document).ready(function(){
       contentType: "application/json",
       complete: function (data, status) {
         if (status == "error") {
-          html = "<div class='alert alert-danger' role='alert'>Unable to login with the credentials provided.</div>"
+          html = "<div class='alert alert-danger' role='alert'>You have entered a wrong combination of username and password. Please try again.</div>"
           $("#loginMessage").html(html)
         } else if(status == "success") {
           // create a message for user
@@ -114,7 +107,7 @@ $(document).ready(function(){
         contentType: "application/json",
         complete: function (data, status) {
           if (status == "error") {
-            html = "<div class='alert alert-danger' role='alert'>Unable to create bucketlist</div>"
+            html = "<div class='alert alert-danger' role='alert'>Unable to create bucketlist. Try another name.</div>"
             $("#bucketlistCreationMessage").html(html)
           } else if(status == "success") {
             // create a message for user
@@ -350,6 +343,7 @@ $(document).ready(function(){
 
 // function to call to show items
 function showItems(details_data){
+  $('[data-toggle="tooltip"]').tooltip();
   details = JSON.parse(details_data);
   var html = "";
   if(details.items.length === 0){
