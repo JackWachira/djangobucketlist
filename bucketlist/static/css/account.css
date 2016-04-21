@@ -1,19 +1,27 @@
 .flex-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
 }
 
 .panel {
-    width: 550px;
-    margin: 5px;
+  width: 550px;
+  margin: 5px;
 }
 
 button {
-    margin: 10px;
+  margin: 10px;
 }
 
 .btn-danger {
   background-color: #653D2E;
+}
+
+.brand {
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+input[type="text"]{
+  color: black;
 }

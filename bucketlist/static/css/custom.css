@@ -34,3 +34,7 @@ body {
   max-width: 600px;
   padding: 40px;
 }
+
+.brand {
+  font-family: 'Gloria Hallelujah', cursive;
+}
