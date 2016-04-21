@@ -49,7 +49,7 @@ This is a bucketlist application written in Python/Django.
 
 You can visit the site on the [Ditter Heroku Page](https://ditter.herokuapp.com).
 
-For developers, the API docs can be accessed on [Ditter API Docs](https://ditter.herokuapp.com/docs/). 
+For developers, the API docs can be accessed on [Ditter API Docs](https://ditter.herokuapp.com/docs/).
 
 #### Example usage (Note: Examples use [HTTPie](https://github.com/jkbrzt/httpie) to send requests)
 
@@ -93,7 +93,7 @@ X-Frame-Options: SAMEORIGIN
 
 ## Testing
 
-In the project root folder, run command `python bucketlist/manage.py test bucketlist/api`
+In the project root folder, run command `python bucketlist/manage.py test bucketlist/api --settings=bucketlist.test_settings`
 
 ## License
 
