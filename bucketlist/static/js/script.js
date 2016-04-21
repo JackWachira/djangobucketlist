@@ -187,7 +187,7 @@ function showBucketLists(){
             html += "</div>";
             html += "<div class='panel-footer'>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-danger delete_bucket'>Delete</button>";
-            html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
+            html += "<button id='" + bucketlists[i].id + "' name='" + bucketlists[i].name + "' class='btn btn-primary update_bucket' data-toggle='modal' data-target='#updateBucketlist'>Edit</button>";
             html += "<button id='" + bucketlists[i].id + "' class='btn btn-primary bucket_items'>See Items</button>";
             html += "</div>";
             html += "</div>";
@@ -274,6 +274,8 @@ $(document).ready(function(){
   if(pathname == "/account/"){
     $(document).on('click', '.update_bucket', function(event){
       updateId = $(this).attr('id');
+      updateName = $(this).attr('name');
+      $("#updateBucketlist").find("input").val(updateName);
     });
     $(document).on('click', '#doBucketlistUpdate', function(event){
       event.preventDefault();
