@@ -178,11 +178,11 @@ function showBucketLists(){
             html += "<div class='panel panel-info'>";
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
             html += "<div class='panel-body'>";
-            html += "<h5>Date Created: " + moment(bucketlists[i].date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</h5>";
+            html += "<h6>Date Created: " + moment(bucketlists[i].date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</h6>";
             if(bucketlists[i].items.length === 0){
-              html += "<h5>There are currently no items in this bucketlist</h5>";
+              html += "<h3>There are currently no items in this bucketlist</h3>";
             } else if(bucketlists[i].items.length > 0) {
-              html += "<h5>Featured Item: " + bucketlists[i].items[0].name + "</h5>";
+              html += "<h3>Featured Item: " + bucketlists[i].items[0].name + "</h3>";
             }
             html += "</div>";
             html += "<div class='panel-footer'>";
@@ -558,11 +558,11 @@ $(document).ready(function(){
             html += "<div class='panel panel-info'>";
             html += "<div class='panel-heading'>" + bucketlists[i].name + "</div>";
             html += "<div class='panel-body'>";
-            html += "<h5>Date Created: " + moment(bucketlists[i].date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</h5>";
+            html += "<h6>Date Created: " + moment(bucketlists[i].date_created.replace(/[-]/g,''), "YYYYMMDD").fromNow() + "</h6>";
             if(bucketlists[i].items.length === 0){
-              html += "<h5>There are currently no items in this bucketlist</h5>";
+              html += "<h3>There are currently no items in this bucketlist</h3>";
             } else if(bucketlists[i].items.length > 0) {
-              html += "<h5>Featured Item: " + bucketlists[i].items[0].name + "</h5>";
+              html += "<h3>Featured Item: " + bucketlists[i].items[0].name + "</h3>";
             }
             html += "</div>";
             html += "<div class='panel-footer'>";
