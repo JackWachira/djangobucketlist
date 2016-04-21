@@ -101,17 +101,8 @@ WSGI_APPLICATION = 'bucketlist.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangobucketlist',
-        'USER': 'Administrator',
-        'PASSWORD': 'administrator',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
-
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
