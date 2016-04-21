@@ -15,7 +15,7 @@ env:
   - DB=sqlite
 
 script:
-  - python bucketlist/manage.py test bucketlist/api/
+  - python bucketlist/manage.py test bucketlist/api/ --settings=bucketlist.test_settings
 
 after_success:
   - coveralls
