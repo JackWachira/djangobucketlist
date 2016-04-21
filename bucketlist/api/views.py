@@ -42,7 +42,7 @@ class BucketListView(generics.ListCreateAPIView):
             search_results = []
 
             for bucket in bucketlists:
-                if q in bucket.name:
+                if q.lower() in bucket.name.lower():
                     search_results.append(bucket)
 
             return search_results
